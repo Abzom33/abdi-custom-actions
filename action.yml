@@ -1,0 +1,16 @@
+name : My custom action
+
+description: "Running a custom Terraform checker"
+
+runs:
+  using: composite
+  steps:
+    - uses: hashicorp/setup-terraform@v3
+    - run: terraform fmt 
+      shell: bash
+    - run: terraform init -backend=false
+      shell: bash
+
+
+    - run: terraform validate
+      shell: bash
