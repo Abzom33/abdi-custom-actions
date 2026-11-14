@@ -1,16 +1,21 @@
-name : My custom action
-
-description: "Running a custom Terraform checker"
+name: "py check"
+description: "set up python, install deps, lint and test"
 
 runs:
-  using: composite
+  using: "composite"
   steps:
-    - uses: hashicorp/setup-terraform@v3
-    - run: terraform fmt 
-      shell: bash
-    - run: terraform init -backend=false
+    - uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+
+    - run: pip install -r requirements.txt
       shell: bash
 
+    - run: pip install flake8 pytest
+      shell: bash
 
-    - run: terraform validate
+    - run: flake8 .
+      shell: bash
+
+    - run: pytest
       shell: bash
