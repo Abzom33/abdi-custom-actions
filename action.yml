@@ -8,8 +8,6 @@ runs:
       with:
         python-version: "3.12"
 
-    - run: pip install -r requirements.txt
-      shell: bash
 
     - run: pip install flake8 pytest
       shell: bash
